@@ -1,0 +1,17 @@
+.form_nweet {
+  text-align: center;
+  align-tracks: center;
+}
+
+.input_text {
+  display: block;
+  width: 50%;
+  height: 50px;
+  border-style: solid 5px;
+  border-color: white;
+}
+
+.input_text::placeholder {
+  color: white;
+  opacity: 1;
+}
