@@ -13,7 +13,7 @@ const AppRouter = ({ isLoggedIn }) => {
         <NavBar isLoggedIn={isLoggedIn} />
         <Switch>
           <Route exact path="/">
-            <Home />
+            <Home isLoggedIn={isLoggedIn} />
           </Route>
           <Route exact path="/profile">
             <Profile />

@@ -1,11 +1,16 @@
+.nweetForm {
+  display: flex;
+  justify-content: center;
+  margin: 10px auto;
+}
+
 .form_nweet {
   text-align: center;
-  align-tracks: center;
 }
 
 .input_text {
   display: block;
-  width: 50%;
+  width: 400px;
   height: 50px;
   border-style: solid 5px;
   border-color: white;

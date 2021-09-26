@@ -1,10 +1,10 @@
 import React from "react";
 import NweetForm from "../components/NweetForm";
 import "./Home.css";
-function Home() {
+function Home({ isLoggedIn }) {
   return (
     <div>
-      <NweetForm />
+      <NweetForm isLoggedIn={isLoggedIn} />
       <div className="home">Home</div>
     </div>
   );
