@@ -78,14 +78,26 @@ function Login() {
         />
         <input className="form_submit" type="submit" value="LogIn" />
       </form>
-      <button name="google" onClick={onClickSocialLogin}>
-        Continue with Google
-      </button>
-      <button name="github" onClick={onClickSocialLogin}>
-        Continue with Github
-      </button>
+      <div className="socialLogins">
+        <button
+          className="btn-socialLogin"
+          name="google"
+          onClick={onClickSocialLogin}
+        >
+          Continue with Google
+        </button>
+        <button
+          className="btn-socialLogin"
+          name="github"
+          onClick={onClickSocialLogin}
+        >
+          Continue with Github
+        </button>
+      </div>
       <div>{error}</div>
-      <Link to="/createAccount">Create Account</Link>
+      <div className="btn-createAccount">
+        <Link to="/createAccount">Create Account</Link>
+      </div>
     </>
   );
 }

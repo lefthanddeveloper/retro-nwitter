@@ -3,12 +3,15 @@ import { useState } from "react";
 import "./NweetForm.css";
 import { firebaseFireStore, fireStore } from "../firebase";
 import * as BootstrapIcon from "react-icons/bs";
+import Pixelate from "pixelate";
 
 function NweetForm({ isLoggedIn, userObj }) {
   const history = useHistory();
   const [nweet, setNweet] = useState("");
   const [isMouseOver, setIsMouseOver] = useState(false);
   const [attachment, setAttachment] = useState(null);
+
+  const theImage = <img src={attachment} className="attachedImage" />;
 
   const OnChange = (event) => {
     const {
@@ -55,6 +58,7 @@ function NweetForm({ isLoggedIn, userObj }) {
     const {
       target: { files },
     } = event;
+
     if (files.length === 0) return;
     const theFile = files[0];
     const reader = new FileReader();
@@ -67,18 +71,33 @@ function NweetForm({ isLoggedIn, userObj }) {
     reader.readAsDataURL(theFile);
   };
 
+  const onClickCancelImage = () => {
+    setAttachment(null);
+  };
+
   return (
     <div className="nweetForm">
       <form onSubmit={onSubmit} className="form_nweet">
-        <input
-          className="input_text"
-          type="text"
-          placeholder="What's in your head today?"
-          required
-          value={nweet}
-          onChange={OnChange}
-          onClick={OnClick}
-        />
+        <div className="inputArea">
+          <textarea
+            className="input_text"
+            type="textarea"
+            placeholder="What's in your head now?"
+            required
+            value={nweet}
+            onChange={OnChange}
+            onClick={OnClick}
+          />
+          {attachment && (
+            <>
+              {/* <img src={attachment} className="attachedImage" /> */}
+              {theImage}
+              <button className="btn-cancelImage" onClick={onClickCancelImage}>
+                X
+              </button>
+            </>
+          )}
+        </div>
         <div className="form_bottom">
           <label className="label-image">
             <BootstrapIcon.BsImageAlt className="btn_image" />
@@ -89,15 +108,6 @@ function NweetForm({ isLoggedIn, userObj }) {
               onChange={onFileChange}
             />
           </label>
-          {/* <div className="container-btn_image">
-            <input
-              className="input-image"
-              type="file"
-              accept="image/*"
-              onChange={onFileChange}
-            />
-          </div>
-          <BootstrapIcon.BsImageAlt className="btn_image" /> */}
           <input
             className={`input_submit ${
               isMouseOver ? "submit-mouseOver" : "submit-mouseOut"
@@ -108,7 +118,6 @@ function NweetForm({ isLoggedIn, userObj }) {
           />
         </div>
       </form>
-      {attachment && <img src={attachment} className="attachment-Image" />}
     </div>
   );
 }
