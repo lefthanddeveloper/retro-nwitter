@@ -12,11 +12,83 @@
   display: block;
   width: 400px;
   height: 50px;
-  border-style: solid 5px;
+  border-style: solid;
+  border-radius: 3px;
   border-color: white;
+  font-size: 20px;
+
+  padding: 0 10px 0 20px;
 }
 
 .input_text::placeholder {
   color: white;
-  opacity: 1;
+  opacity: 0.85;
+}
+
+.input_submit {
+  background-color: blue;
+  color: white;
+  width: 100px;
+  height: 30px;
+  border-style: solid;
+  border-radius: 3px;
+  border-color: whitesmoke;
+  float: right;
+
+  font-size: 15px;
+}
+
+.input_submit:hover {
+  cursor: pointer;
+}
+
+.submit-mouseOver {
+  background-color: whitesmoke;
+  color: blue;
+}
+
+.submit-mouseOut {
+  background-color: blue;
+  color: white;
+}
+
+.form_bottom {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label-image {
+  width: 28px;
+  height: 28px;
+  border-style: solid;
+  border-radius: 3px;
+  border-width: 2px;
+}
+
+.input-image {
+  display: none;
+}
+
+/* .container-btn_image {
+  width: 28px;
+  height: 28px;
+  border-style: solid;
+  border-radius: 3px;
+  border-width: 2px;
+} */
+
+.btn_image {
+  /* position: relative; */
+  margin: 25% auto;
+  font-size: 15px;
+}
+.label-image:hover {
+  cursor: pointer;
+}
+
+.attachment-Image {
+  margin-left: 30px;
+  width: 60px;
+  height: 60px;
 }

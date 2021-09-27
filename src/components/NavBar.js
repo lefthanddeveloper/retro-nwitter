@@ -23,7 +23,7 @@ function NavBar({ isLoggedIn }) {
           )}
         </li>
       </ul>
-      <hr></hr>
+      <hr className="line_navBar"></hr>
     </>
   );
 }

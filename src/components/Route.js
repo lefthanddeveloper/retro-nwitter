@@ -6,14 +6,14 @@ import Login from "../routes/Login";
 import Profile from "../routes/Profile";
 import NavBar from "./NavBar";
 
-const AppRouter = ({ isLoggedIn }) => {
+const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <>
       <Router>
         <NavBar isLoggedIn={isLoggedIn} />
         <Switch>
           <Route exact path="/">
-            <Home isLoggedIn={isLoggedIn} />
+            <Home isLoggedIn={isLoggedIn} userObj={userObj} />
           </Route>
           <Route exact path="/profile">
             <Profile />

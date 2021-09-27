@@ -1,11 +1,12 @@
 import React from "react";
+import NweetContainer from "../components/NweetContainer";
 import NweetForm from "../components/NweetForm";
 import "./Home.css";
-function Home({ isLoggedIn }) {
+function Home({ isLoggedIn, userObj }) {
   return (
     <div>
-      <NweetForm isLoggedIn={isLoggedIn} />
-      <div className="home">Home</div>
+      <NweetForm isLoggedIn={isLoggedIn} userObj={userObj} />
+      <NweetContainer userObj={userObj} />
     </div>
   );
 }

@@ -6,10 +6,10 @@ import AppRouter from "./Route";
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(firebaseAuth.currentUser);
-
+  const [userObj, setUserObj] = useState(null);
   const RegisterAuthStateChangeEvent = () => {
     firebaseAppAuth.onAuthStateChanged(firebaseAuth, (user) => {
-      console.log(user);
+      setUserObj(user);
       setIsLoggedIn(user);
       setInit(true);
     });
@@ -21,7 +21,11 @@ function App() {
 
   return (
     <div className="App">
-      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : <div>Loading...</div>}
+      {init ? (
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+      ) : (
+        <div>Loading...</div>
+      )}
 
       <footer>&copy; {new Date().getFullYear()} Retro Nwitter</footer>
     </div>
