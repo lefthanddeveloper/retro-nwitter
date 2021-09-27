@@ -16,7 +16,9 @@ function Profile() {
     <>
       <div className="profile">
         <div>Profile</div>
-        <button onClick={onClickLogOut}>Log Out</button>
+        <button onClick={onClickLogOut} className="btn-logout">
+          Log Out
+        </button>
       </div>
     </>
   );

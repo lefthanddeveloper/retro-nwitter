@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { firebaseAppAuth, firebaseAuth } from "../firebase";
+import "./Login.css";
 
 function Login() {
   const history = useHistory();
@@ -58,6 +59,7 @@ function Login() {
     <>
       <form className="form_Login" onSubmit={onSubmit}>
         <input
+          className="form_input"
           type="text"
           placeholder="Email"
           name="email"
@@ -66,6 +68,7 @@ function Login() {
           required
         />
         <input
+          className="form_input"
           type="password"
           placeholder="Password"
           name="password"
@@ -73,7 +76,7 @@ function Login() {
           onChange={onChange}
           required
         />
-        <input type="submit" value="LogIn" />
+        <input className="form_submit" type="submit" value="LogIn" />
       </form>
       <button name="google" onClick={onClickSocialLogin}>
         Continue with Google
