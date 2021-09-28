@@ -1,9 +1,14 @@
 import { useHistory } from "react-router";
 import { useState } from "react";
 import "./NweetForm.css";
-import { firebaseFireStore, fireStore } from "../firebase";
+import {
+  firebaseAppStorage,
+  firebaseFireStore,
+  firebaseStorage,
+  fireStore,
+} from "../firebase";
 import * as BootstrapIcon from "react-icons/bs";
-import Pixelate from "pixelate";
+import { v4 as uuidv4 } from "uuid";
 
 function NweetForm({ isLoggedIn, userObj }) {
   const history = useHistory();
@@ -31,19 +36,40 @@ function NweetForm({ isLoggedIn, userObj }) {
     e.preventDefault();
 
     try {
+      let attachmentUrl = "";
+
+      if (attachment != "") {
+        const attachmentRef = firebaseAppStorage.ref(
+          firebaseStorage,
+          `${userObj.uid}/${uuidv4()}`
+        );
+
+        const response = await firebaseAppStorage.uploadString(
+          attachmentRef,
+          attachment,
+          "data_url"
+        );
+
+        attachmentUrl = await firebaseAppStorage.getDownloadURL(response.ref);
+      }
+
+      const nweetObj = {
+        text: nweet,
+        createdAt: Date.now(),
+        creatorId: userObj.uid,
+        attachmentUrl,
+      };
+
       await firebaseFireStore.addDoc(
         firebaseFireStore.collection(fireStore, "nweets"),
-        {
-          text: nweet,
-          createdAt: Date.now(),
-          creatorId: userObj.uid,
-        }
+        nweetObj
       );
     } catch (e) {
       console.error("Error adding document : " + e);
     }
 
     setNweet("");
+    setAttachment("");
   };
 
   const OnMouseOver = () => {
