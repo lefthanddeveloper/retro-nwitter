@@ -5,8 +5,11 @@ import { firebaseAppAuth, firebaseAuth } from "../firebase";
 function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
   const history = useHistory();
   const onChange = (event) => {
     const {
@@ -19,6 +22,8 @@ function CreateAccount() {
       setPassword(value);
     } else if (name === "confirm") {
       setConfirm(value);
+    } else if (name === "displayName") {
+      setDisplayName(value);
     }
   };
 
@@ -30,21 +35,27 @@ function CreateAccount() {
     }
 
     try {
-      await firebaseAppAuth.createUserWithEmailAndPassword(
-        firebaseAuth,
-        email,
-        password
-      );
-      history.push("/");
+      firebaseAppAuth
+        .createUserWithEmailAndPassword(firebaseAuth, email, password)
+        .then((result) => {
+          //update display
+          firebaseAppAuth
+            .updateProfile(result.user, {
+              displayName: displayName,
+            })
+            .then(() => {
+              history.push("/");
+            });
+        });
     } catch (error) {
       setError(error.message);
     }
   };
-
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="form_Login">
         <input
+          className="form_input"
           name="email"
           type="text"
           placeholder="New Email Account"
@@ -53,6 +64,7 @@ function CreateAccount() {
           required
         />
         <input
+          className="form_input"
           name="password"
           type="password"
           placeholder="Password"
@@ -62,6 +74,7 @@ function CreateAccount() {
           required
         />
         <input
+          className="form_input"
           name="confirm"
           type="password"
           placeholder="Confirm Password"
@@ -70,7 +83,28 @@ function CreateAccount() {
           minLength="5"
           required
         />
-        <input type="submit" value="Create" />
+        <input
+          className="form_input"
+          type="text"
+          placeholder="Display Name"
+          name="displayName"
+          value={displayName}
+          onChange={onChange}
+          required
+        />
+        <input
+          className={`form_submit ${
+            isMouseOver ? "login-mouseOver" : "login-mouseOut"
+          }`}
+          type="submit"
+          value="Create"
+          onMouseOver={() => {
+            setIsMouseOver(true);
+          }}
+          onMouseOut={() => {
+            setIsMouseOver(false);
+          }}
+        />
       </form>
       <span>{error}</span>
     </>

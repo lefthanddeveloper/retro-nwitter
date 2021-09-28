@@ -6,7 +6,7 @@ function Home({ isLoggedIn, userObj }) {
   return (
     <div>
       <NweetForm isLoggedIn={isLoggedIn} userObj={userObj} />
-      <NweetContainer userObj={userObj} />
+      <NweetContainer userObj={userObj} isProfile={false} />
     </div>
   );
 }

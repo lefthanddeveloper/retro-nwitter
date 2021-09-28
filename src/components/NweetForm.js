@@ -14,7 +14,7 @@ function NweetForm({ isLoggedIn, userObj }) {
   const history = useHistory();
   const [nweet, setNweet] = useState("");
   const [isMouseOver, setIsMouseOver] = useState(false);
-  const [attachment, setAttachment] = useState(null);
+  const [attachment, setAttachment] = useState("");
 
   const theImage = <img src={attachment} className="attachedImage" />;
 
@@ -56,10 +56,12 @@ function NweetForm({ isLoggedIn, userObj }) {
       const nweetObj = {
         text: nweet,
         createdAt: Date.now(),
+        creatorDisplayName: userObj.displayName,
         creatorId: userObj.uid,
         attachmentUrl,
       };
 
+      console.log(nweetObj);
       await firebaseFireStore.addDoc(
         firebaseFireStore.collection(fireStore, "nweets"),
         nweetObj

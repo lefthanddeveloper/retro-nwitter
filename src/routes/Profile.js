@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
+import NweetContainer from "../components/NweetContainer";
 import {
   firebaseAppAuth,
   firebaseAuth,
@@ -37,10 +38,15 @@ function Profile({ userObj }) {
   return (
     <>
       <div className="profile">
-        <div>{userObj.displayName} Profile</div>
+        <div className="profileName">
+          {userObj && userObj.displayName} Profile
+        </div>
         <button onClick={onClickLogOut} className="btn-logout">
           Log Out
         </button>
+        <div className="myNweets">My RetroNweets</div>
+        <hr className="hrLine"></hr>
+        <NweetContainer userObj={userObj} isProfile={true} />
       </div>
     </>
   );

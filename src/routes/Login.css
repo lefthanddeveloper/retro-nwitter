@@ -15,6 +15,14 @@
   border-style: solid;
   border-radius: 3px;
   border-color: white;
+  text-indent: 10px;
+  font-size: 15px;
+  color: white;
+}
+
+.form_input::placeholder {
+  color: white;
+  opacity: 0.7;
 }
 
 .form_submit {
@@ -28,6 +36,20 @@
   margin-top: 20px;
 }
 
+.form_submit:hover {
+  cursor: pointer;
+}
+
+.login-mouseOver {
+  background-color: whitesmoke;
+  color: blue;
+}
+
+.login-mouseOut {
+  background-color: blue;
+  color: white;
+}
+
 .socialLogins {
   margin-top: 20px;
   display: flex;
@@ -36,6 +58,13 @@
 
 .btn-socialLogin {
   margin: 0 5px;
+  font-size: 15px;
+
+  padding: 5px;
+}
+
+.btn-socialLogin:hover {
+  cursor: pointer;
 }
 
 .btn-createAccount {

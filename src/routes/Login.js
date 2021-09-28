@@ -9,6 +9,8 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
   const onChange = (event) => {
     const {
       target: { value, name },
@@ -55,12 +57,18 @@ function Login() {
       });
   };
 
+  const onMouseOverLoginBtn = () => {
+    setIsMouseOver(true);
+  };
+  const onMouseOutLoginBtn = () => {
+    setIsMouseOver(false);
+  };
   return (
     <>
       <form className="form_Login" onSubmit={onSubmit}>
         <input
           className="form_input"
-          type="text"
+          type="email"
           placeholder="Email"
           name="email"
           value={email}
@@ -76,7 +84,15 @@ function Login() {
           onChange={onChange}
           required
         />
-        <input className="form_submit" type="submit" value="LogIn" />
+        <input
+          className={`form_submit ${
+            isMouseOver ? "login-mouseOver" : "login-mouseOut"
+          }`}
+          type="submit"
+          value="LogIn"
+          onMouseOver={onMouseOverLoginBtn}
+          onMouseOut={onMouseOutLoginBtn}
+        />
       </form>
       <div className="socialLogins">
         <button

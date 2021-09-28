@@ -29,16 +29,26 @@ function Nweet({ nweetObj, isOwner }) {
 
   return (
     <div className="nweetObj">
-      <div className="nweetText">{nweetObj.text}</div>
-      {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
-      {isOwner && (
-        <>
-          <BoxIcons.BiWindowClose
-            className="deleteBtn"
-            onClick={onClickDelete}
-          />
-          {/* </button> */}
-        </>
+      <div className="nweetContent">
+        <span className="nweetText">{`* ${nweetObj.creatorDisplayName} : ${nweetObj.text}`}</span>
+        <span className="nweetCreatedAt">
+          (
+          {`${new Date(nweetObj.createdAt).toLocaleDateString()} ${new Date(
+            nweetObj.createdAt
+          ).toLocaleTimeString()}`}
+          )
+        </span>
+        {isOwner && (
+          <>
+            <BoxIcons.BiWindowClose
+              className="deleteBtn"
+              onClick={onClickDelete}
+            />
+          </>
+        )}
+      </div>
+      {nweetObj.attachmentUrl && (
+        <img className="nweetImage" src={nweetObj.attachmentUrl} />
       )}
     </div>
   );

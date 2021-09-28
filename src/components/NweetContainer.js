@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { firebaseFireStore, fireStore } from "../firebase";
 import Nweet from "./Nweet";
 
-function NweetContainer({ userObj }) {
+function NweetContainer({ userObj, isProfile }) {
   const [nweets, setNweets] = useState([]);
 
   // const getNweetsFromDB = async () => {
@@ -23,17 +23,30 @@ function NweetContainer({ userObj }) {
 
   useEffect(() => {
     // getNweetsFromDB();
-
-    firebaseFireStore.onSnapshot(
-      firebaseFireStore.collection(fireStore, "nweets"),
-      (snapShot) => {
-        const newNweets = snapShot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setNweets(newNweets);
+    let q;
+    if (!isProfile) {
+      q = firebaseFireStore.query(
+        firebaseFireStore.collection(fireStore, "nweets"),
+        firebaseFireStore.orderBy("createdAt")
+      );
+    } else {
+      q = firebaseFireStore.query(
+        firebaseFireStore.collection(fireStore, "nweets"),
+        firebaseFireStore.where("creatorId", "==", userObj.uid)
+      );
+    }
+    let newNweets;
+    firebaseFireStore.onSnapshot(q, (snapShot) => {
+      newNweets = snapShot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      if (!isProfile && newNweets.length > 10) {
+        const tempNewNweets = newNweets.slice(-10);
+        newNweets = tempNewNweets;
       }
-    );
+      setNweets(newNweets);
+    });
   }, []);
 
   return (
