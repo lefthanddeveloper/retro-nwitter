@@ -41,10 +41,11 @@ function NweetContainer({ userObj, isProfile }) {
         id: doc.id,
         ...doc.data(),
       }));
-      if (!isProfile && newNweets.length > 10) {
-        const tempNewNweets = newNweets.slice(-10);
-        newNweets = tempNewNweets;
-      }
+
+      // if (!isProfile && newNweets.length > 10) {
+      //   const tempNewNweets = newNweets.slice(-10);
+      //   newNweets = tempNewNweets;
+      // }
       setNweets(newNweets);
     });
   }, []);
